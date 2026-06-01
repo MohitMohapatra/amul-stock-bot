@@ -13,10 +13,8 @@ from bs4 import BeautifulSoup
 
 # ── CONFIG (set these as GitHub Secrets / env vars) ───────────────────────────
 
-PRODUCT_URL     = os.environ.get(
-    "AMUL_PRODUCT_URL",
-    "https://shop.amul.com/en/product/amul-chocolate-whey-protein-34-g-or-pack-of-60-sachets",
-)
+PRODUCT_URL     = os.environ.get("AMUL_PRODUCT_URL") or \
+    "https://shop.amul.com/en/product/amul-chocolate-whey-protein-34-g-or-pack-of-60-sachets"
 SENDER_EMAIL    = os.environ["AMUL_SENDER_EMAIL"]
 SENDER_PASSWORD = os.environ["AMUL_SENDER_PASSWORD"]   # Gmail App Password
 RECEIVER_EMAIL  = os.environ["AMUL_RECEIVER_EMAIL"]
