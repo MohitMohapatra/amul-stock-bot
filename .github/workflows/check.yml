@@ -1,0 +1,27 @@
+name: Amul Stock Check
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'   # every 5 minutes
+  workflow_dispatch:          # manual trigger from GitHub UI
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Check stock
+        run: python bot.py
+        env:
+          AMUL_SENDER_EMAIL:    ${{ secrets.AMUL_SENDER_EMAIL }}
+          AMUL_SENDER_PASSWORD: ${{ secrets.AMUL_SENDER_PASSWORD }}
+          AMUL_RECEIVER_EMAIL:  ${{ secrets.AMUL_RECEIVER_EMAIL }}
+          AMUL_PRODUCT_URL:     ${{ secrets.AMUL_PRODUCT_URL }}    # optional
